@@ -1,0 +1,167 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <style>
+        .flexcontainer {
+            display: flex;
+            flex-direction: row;
+            gap: 10px;           
+            margin: 10px;
+        }
+        .label-text {
+            display: inline-flex;
+            width: 90px;
+            color: white;
+            margin-bottom: 10px;
+        }
+        .input-field {
+            display: inline-flex;
+            width: 100px;
+            margin-bottom: 10px;        
+        }
+        .note {
+            display: inline-flex;
+            color: white;
+            margin-bottom: 10px;
+        }
+        #wd1 {
+            margin-left: 75px;
+        }
+        #wd2 {
+            margin-right: 50%;
+        }
+    </style>
+</head>
+<body bgcolor="gray">
+    <form method="post" name="form1">
+        <div border="1">
+            <div class="label-text">First Name:</div>
+            <div class="input-field">
+                <input type="text" id="ffname" name="ffname" style="width: 100%;">
+            </div>
+            <div class="note">(Please enter name)</div>
+        </div>
+        <div>
+            <div class="label-text">Last Name:</div>
+            <div class="input-field">
+                <input type="text" id="lfname" name="lfname" style="width: 100%;">
+            </div>
+            <div class="note">(Please enter name)</div>
+        </div>
+        <div>
+            <div class="label-text">Email:</div>
+            <div class="input-field">
+                <input type="text" id="email" name="email" style="width: 100%;">
+            </div>
+            <div class="note">(Please enter email)</div>
+        </div>
+        <div>
+            <div class="label-text">Password:</div>
+            <div class="input-field">
+                <input type="text" id="pass" name="pass" style="width: 100%;">
+            </div>
+            <div class="note">(Please enter password)</div>
+        </div>
+        <div>
+            <div class="label-text">CNIC:</div>
+            <div class="input-field">
+                <input type="text" id="cnic" name="cnic" style="width: 100%;">
+            </div>
+            <div class="note">(Please enter CNIC)</div>
+        </div>
+        <div>
+            <input type="submit" id="wd1" value="submit" onclick="jsfunc(event)"> 
+            <input type="reset" id="wd2" value="reset"> 
+        </div>
+    </form>
+
+    <script>
+        function isAlphabetOnly(str) {
+            for (let i = 0; i < str.length; i++) {
+                let ch = str[i];
+                if (!((ch >= 'A' && ch <= 'Z') || (ch >= 'a' && ch <= 'z'))) {
+                    return false;
+                }
+            }
+            return true;
+        }
+
+        function startsWithLetter(e) {
+            return (e[0] >= 'A' && e[0] <= 'Z') || (e[0] >= 'a' && e[0] <= 'z');
+        }
+let count=0;
+        function containsDigitAfterFirst(e) {
+            for (let i = 0; i < e.length; i++) {
+                if (e[i] >= '0' && e[i] <= '9') {
+                    count++;
+                }
+            }
+            if (count>=1){return true;}
+            return false;
+        }
+
+        function endsWithUcpDotCom(e) {
+            const suffix = "@ucp.com";
+            if (e.length < suffix.length) {
+                return false;
+            }
+            for (let i = 0; i < suffix.length; i++) {
+                if (e[e.length - suffix.length + i] !== suffix[i]) {
+                    return false;
+                }
+            }
+            return true;
+        }
+
+        function isValidEmail(e) {
+            return (startsWithLetter(e) || containsDigitAfterFirst(e)) && endsWithUcpDotCom(e);
+        }
+        function passcheck(p){
+            for (let i=0;i<p.length;i++){
+                if (p[i]>='a' && p[i]<='z'|| p[i]>='0' && p[i]<='9'){
+                    return true;
+                }
+            }
+               return false;
+            }
+        function cnic(c){
+            if(c.length===15){
+                if (c[5]==='-' && c[13]==='-')
+                return true;
+            }
+            return false;
+        }
+
+        function jsfunc(event) {
+            let f = document.getElementById("ffname").value;
+            let l = document.getElementById("lfname").value;
+            let e = document.getElementById("email").value;
+            let p =document.getElementById("pass").value;
+            let c =document.getElementById("cnic").value;
+            if (f === "" || l === "" || e === "" ||p==="") {
+                alert("Please fill out all required fields.");
+                return;
+            }
+            if (!isAlphabetOnly(f) || !isAlphabetOnly(l)) {
+                alert("First and Last name must contain alphabets only.");
+                return;
+            }
+            if (!isValidEmail(e)) {
+                alert("Email must start with a letter or contain a digit and end with @ucp.com");
+                return;
+            }
+            if (!passcheck(p)) {
+                alert("pass must start with a letter or contain a digit");
+                return;
+            }
+            if (!cnic(c)) {
+                alert("incorrect cnic");
+                return;
+            }
+
+            alert("Form submitted successfully!");
+         
+        }
+    </script>
+</body>
+</html>

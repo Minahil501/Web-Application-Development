@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Event Demo</title>
+  <style>
+    #hoverBox {
+      width: 200px;
+      height: 100px;
+      background-color: lightgray;
+      line-height: 100px;
+      text-align: center;
+      margin-bottom: 20px;
+      border: 1px solid #333;
+    }
+  </style>
+</head>
+<body onload="pageLoaded()">
+
+  <h2>Event Handling Example</h2>
+  <div id="hoverBox" onmouseover="mouseHover()">Hover Over Me</div>
+  <button onclick="buttonClicked()">Click Me</button>
+  <br><br>
+  <form onsubmit="return formSubmitted()">
+    <label for="name">Enter Name:</label>
+    <input type="text" id="name" onkeyup="keyUpEvent(event)" onkeydown="keyDownEvent(event)">
+    <button type="submit">Submit</button>
+  </form>
+  <p id="keyDownOutput" style="color:blue;"></p>
+  <p id="keyUpOutput" style="color:green;"></p>
+
+  <script>
+    function pageLoaded() {
+      alert("Page loaded successfully!");
+    }
+
+    function mouseHover() {
+      console.log("Mouse hovered over the box.");
+      document.getElementById("hoverBox").style.backgroundColor = "lightblue";
+    }
+
+    function buttonClicked() {
+      alert("Button was clicked!");
+    }
+
+    function formSubmitted() {
+      alert("Form submitted with name: " + document.getElementById("name").value);
+      return false;
+    }
+
+    function keyDownEvent(event) {
+      document.getElementById("keyDownOutput").innerText = "Key down: " + event.key;
+    }
+
+    function keyUpEvent(event) {
+      document.getElementById("keyUpOutput").innerText = "Key up: " + event.key;
+    }
+  </script>
+
+</body>
+</html>

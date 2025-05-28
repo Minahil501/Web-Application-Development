@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Dom demo</title>
+  <style>
+    body {
+      font-family: Arial;
+      padding: 20px;
+    }
+    button {
+      margin: 5px;
+    }
+    .section {
+      margin-bottom: 20px;
+      padding: 10px;
+      border: 1px solid #aaa;
+    }
+  </style>
+</head>
+<body>
+  <h2>javascript dom - add / delete / replace elements</h2>
+
+  <div class="section">
+    <h3>1. create element</h3>
+    <button onclick="createPara()">create paragraph</button>
+    <div id="create"></div>
+  </div>
+  <div class="section">
+    <h3>2. remove element</h3>
+    <div id="removeParent">
+      <p id="removeMe">this sentence will be removed</p>
+    </div>
+    <button onclick="removePara()">remove paragraph</button>
+  </div>
+
+  <div class="section">
+    <h3>3. append element</h3>
+    <ul id="myList">
+      <li>item 1</li>
+    </ul>
+    <button onclick="addItem()">add list item</button>
+  </div>
+
+  <div class="section">
+    <h3>4. replace element</h3>
+    <div id="replaceBox">
+      <p id="oldPara">old paragraph here.</p>
+    </div>
+    <button onclick="replacePara()">replace with new paragraph</button>
+  </div>
+
+  <div class="section">
+    <h3>5. document.write()</h3>
+    <button onclick="writeText()">use document.write (⚠️ warning)</button>
+  </div>
+
+  <script>
+    function createPara() {
+      const para = document.createElement("p");
+      para.innerText = "this is a new paragraph!";
+      document.getElementById("create").appendChild(para);
+    }
+
+    function removePara() {
+      const parent = document.getElementById("removeParent");
+      const child = document.getElementById("removeMe");
+      if (child) {
+        parent.removeChild(child);
+      } else {
+        alert("paragraph already removed!");
+      }
+    }
+
+    function addItem() {
+      const li = document.createElement("li");
+      li.innerText = "new item";
+      document.getElementById("myList").appendChild(li);
+    }
+    function replacePara() {
+      const newPara = document.createElement("p");
+      newPara.innerText = "this is the new paragraph!";
+      const oldPara = document.getElementById("oldPara");
+      const parent = document.getElementById("replaceBox");
+      if (oldPara) {
+        parent.replaceChild(newPara, oldPara);
+      } else {
+        alert("old paragraph already replaced!");
+      }
+    }
+
+    function writeText() {
+      document.write("⚠️ all content is replaced by this line using document.write()");
+    }
+  </script>
+</body>
+</html>

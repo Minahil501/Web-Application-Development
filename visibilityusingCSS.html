@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title></title>
+    <style>
+        body {
+            margin: 0;
+            height: 700px;
+            background-color: #e6f2ff;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            font-family: Arial, sans-serif;
+        }
+
+        h1 {
+            margin-bottom: 20px;
+            color: #333;
+        }
+
+        #myimag {
+            visibility: hidden;
+            height: 300px;
+            width: 300px;
+        }
+
+        #btn {
+            margin-top: 50px;
+        }
+    </style>
+</head>
+<body>
+    <h1>Hide & Seek with a Picture</h1>
+    <img id="myimag" src="https://5.imimg.com/data5/ECOM/Default/2022/9/JK/XU/IL/152820152/1-8486c109-8156-4616-abda-92e69d807842-500x500.png" alt="image">
+    <br>
+    <button id="btn" onclick="toggle()">Show</button>
+
+    <script>
+        function toggle() {
+            let bttn = document.getElementById("btn");
+            let immg = document.getElementById("myimag");
+
+            if (immg.style.visibility === "hidden") {
+                immg.style.visibility = "visible";
+                bttn.innerText = "Hide";
+            } else {
+                immg.style.visibility = "hidden";
+                bttn.innerText = "Show";
+            }
+        }
+    </script>
+</body>
+</html>
